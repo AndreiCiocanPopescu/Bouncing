@@ -36,18 +36,43 @@ window.preload = function () {
     }
 // -----
 
-var x = randomNumber(1, 10);
-var y = randomNumber(1, 10);
-var n = 200;
-var m = 200;
-var ball = ellipse(n, m, 100, 100);
+var ball = createBall();
+
 function draw() {
-  background("white");
-  ball = ellipse(n, m, 100, 100);
-  n = n + x;
-  m = m + y;
+  drawBall(ball)
+  ball.n = ball.n + ball.x;
+  ball.m = ball.m + ball.y;
+  updateShape();
 }
 
+function createBall() {
+  var b = {
+    x: randomNumber(1, 5),
+    y: randomNumber(1, 5),
+    n: 200,
+    m: 200
+  }
+  return b;
+}
+
+function drawBall(b) {
+  ellipse(b.n,b.m,100,100);
+}
+
+function updateShape() {
+  if (ball.n > 350) {
+    ball.x = ball.x * -1;
+  }
+  if (ball.n < 50) {
+    ball.x = ball.x * -1;
+  }
+  if (ball.m > 350) {
+    ball.y = ball.y * -1;
+  }
+  if (ball.m < 50) {
+    ball.y = ball.y * -1;
+  }
+}
 // -----
     try { window.draw = draw; } catch (e) {}
     switch (stage) {
