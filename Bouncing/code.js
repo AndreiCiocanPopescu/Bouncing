@@ -39,26 +39,33 @@ window.preload = function () {
 var ball1 = createBall();
 var ball2 = createBall();
 var ball3 = createBall();
+var n = 200;
+var m = 200;
 
 function draw() {
-  background("white")
-  updateShape(ball1)
-  updateShape(ball2)
-  updateShape(ball3)
-  drawBall(ball1)
-  drawBall(ball2)
-  drawBall(ball3)
+  background("white");
+  updateShape(ball1);
+  updateShape(ball2);
+  updateShape(ball3);
+  drawBall(ball1);
+  drawBall(ball2);
+  drawBall(ball3);
+  clicking();
 }
 function clicking() {
   if (mouseWentDown("leftButton")) {
-    var ball;
+    ball1 = {
+    x: (randomNumber(-10, 10)), // negative values to go all directions
+    y: (randomNumber(-10, 10)),
+    n: (mouseX),
+    m: (mouseY) }
   }
 }
 
 function createBall() {
   var b = {
-    x: (randomNumber(3, 10)), // negative values to go all directions
-    y: (randomNumber(3, 10)),
+    x: (randomNumber(-10, 10)), // negative values to go all directions
+    y: (randomNumber(-10, 10)),
     n: 200,
     m: 200
   }
@@ -86,6 +93,8 @@ function updateShape(ball) {
     ball.y = ball.y * -1;
   }
 }
+
+
 
 
 }
