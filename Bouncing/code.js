@@ -36,29 +36,33 @@ window.preload = function () {
     }
 // -----
 
-var ball1 = createBall();
-var ball2 = createBall();
-var ball3 = createBall();
+var balls = [createBall(),createBall(),createBall()];
+// var ball1 = createBall();
+// var ball2 = createBall();
+// var ball3 = createBall();
 var n = 200;
 var m = 200;
+var p = 0;
+p = 0;
 
 function draw() {
   background("white");
-  updateShape(ball1);
-  updateShape(ball2);
-  updateShape(ball3);
-  drawBall(ball1);
-  drawBall(ball2);
-  drawBall(ball3);
+  updateShape(balls[0]);
+  updateShape(balls[1]);
+  updateShape(balls[2]);
+  drawBall(balls[0]);
+  drawBall(balls[1]);
+  drawBall(balls[2]);
   clicking();
 }
 function clicking() {
-  if (mouseWentDown("leftButton")) {
-    ball1 = {
-    x: (randomNumber(-10, 10)), // negative values to go all directions
+  if (mouseWentDown("leftButton"))  {
+    balls[0] = {
+    x: (randomNumber(-10, 10)), 
     y: (randomNumber(-10, 10)),
     n: (mouseX),
-    m: (mouseY) }
+    m: (mouseY) };
+    p = p+1;
   }
 }
 
@@ -74,26 +78,25 @@ function createBall() {
 
 function drawBall(b) {
   // background("white");
-  ellipse(b.n,b.m,100,100);
+  ellipse(b.n,b.m,50,50);
 }
 
 function updateShape(ball) {
   ball.n = ball.n + ball.x;
   ball.m = ball.m + ball.y;
-  if (ball.n > 350) {
+  if (ball.n > 370) {
     ball.x = ball.x * -1;
   }
-  if (ball.n < 50) {
+  if (ball.n < 30) {
     ball.x = ball.x * -1;
   }
-  if (ball.m > 350) {
+  if (ball.m > 370) {
     ball.y = ball.y * -1;
   }
-  if (ball.m < 50) {
+  if (ball.m < 30) {
     ball.y = ball.y * -1;
   }
 }
-
 
 
 
