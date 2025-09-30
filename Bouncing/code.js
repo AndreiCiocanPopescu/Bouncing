@@ -37,9 +37,7 @@ window.preload = function () {
 // -----
 
 var balls = [createBall(),createBall(),createBall()];
-// var ball1 = createBall();
-// var ball2 = createBall();
-// var ball3 = createBall();
+
 var n = 200;
 var m = 200;
 var p = 0;
@@ -47,22 +45,23 @@ p = 0;
 
 function draw() {
   background("white");
-  updateShape(balls[0]);
-  updateShape(balls[1]);
-  updateShape(balls[2]);
-  drawBall(balls[0]);
-  drawBall(balls[1]);
-  drawBall(balls[2]);
+  for (var i = 0; i < 4; i++) {
+    updateShape(balls[0]);
+    drawBall(balls[0]);
+    updateShape(balls[1]);
+    updateShape(balls[2]);
+    drawBall(balls[1]);
+    drawBall(balls[2]);
+  }
   clicking();
 }
 function clicking() {
   if (mouseWentDown("leftButton"))  {
     balls[0] = {
-    x: (randomNumber(-10, 10)), 
-    y: (randomNumber(-10, 10)),
+    x: (randomNumber(-20, 20)), 
+    y: (randomNumber(-20, 20)),
     n: (mouseX),
     m: (mouseY) };
-    p = p+1;
   }
 }
 
@@ -77,10 +76,9 @@ function createBall() {
 }
 
 function drawBall(b) {
-  // background("white");
+  noStroke();
   ellipse(b.n,b.m,50,50);
 }
-
 function updateShape(ball) {
   ball.n = ball.n + ball.x;
   ball.m = ball.m + ball.y;
@@ -97,6 +95,8 @@ function updateShape(ball) {
     ball.y = ball.y * -1;
   }
 }
+
+
 
 
 
