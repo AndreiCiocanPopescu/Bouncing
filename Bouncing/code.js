@@ -36,22 +36,45 @@ window.preload = function () {
     }
 // -----
 
-var balls = [createBall(),createBall(),createBall()];
+var balls = [] 
 
 var n = 200;
 var m = 200;
 var p = 0;
-p = 0;
+var w = 50;
+w = 50;
+ var radius = 25;
+var numberOfBallObjects = 6;
+
+for (var i = 0; i < numberOfBallObjects; i++) {
+   balls.push(createBall());
+}
+
+ function ballsCollide(ballA, ballB) {
+  return dist( ballA.n, ballA.m, ballB.n, ballB.m ) <= 2*radius
+}
+
+function bounceBalls(ballA, ballB) {
+  if( ballsCollide(ballA, ballB) ) {
+    ballA.x *= -1;
+    ballA.y *= -1;
+    ballB.x *= -1;
+    ballB.y *= -1;
+  }
+}
+
+
 
 function draw() {
   background("white");
-  for (var i = 0; i < 4; i++) {
-    updateShape(balls[0]);
-    drawBall(balls[0]);
-    updateShape(balls[1]);
-    updateShape(balls[2]);
-    drawBall(balls[1]);
-    drawBall(balls[2]);
+  for( var i = 0; i < balls.length - 1; i++ ) { 
+    for( var j = i+1; j < balls.length; j++ ) {
+      bounceBalls(balls[i], balls[j])}}
+      
+  for (var i = 0; i < balls.length; i++) {
+    updateShape(balls[i]);
+    drawBall(balls[i]);
+    
   }
   clicking();
 }
@@ -69,15 +92,15 @@ function createBall() {
   var b = {
     x: (randomNumber(-10, 10)), // negative values to go all directions
     y: (randomNumber(-10, 10)),
-    n: 200,
-    m: 200
+    n: (randomNumber(100, 350)),
+    m: (randomNumber(100, 350))
   }
   return b;
 }
 
 function drawBall(b) {
   noStroke();
-  ellipse(b.n,b.m,50,50);
+  ellipse(b.n,b.m,2*radius,2*radius);
 }
 function updateShape(ball) {
   ball.n = ball.n + ball.x;
@@ -94,9 +117,10 @@ function updateShape(ball) {
   if (ball.m < 30) {
     ball.y = ball.y * -1;
   }
+  
+
+  
 }
-
-
 
 
 
